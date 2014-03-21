@@ -1,0 +1,51 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{AMSFONTS}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{authblk}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\textwidth 6.5in
+\textheight 9in
+\topmargin 0pt
+\linespread{1.5}
+\oddsidemargin 0pt
+\title{\huge STA 250 Project Report}
+\newtheorem{coro}{\hskip 2em Corollary}[section]
+\newtheorem{remark}[coro]{\hskip 2em Remark}
+\newtheorem{propo}[coro]{\hskip 2em  Proposition}
+\newtheorem{lemma}[coro]{\hskip 2em Lemma}
+\newtheorem{theor}[coro]{\hskip 2em Theorem}
+\newenvironment{prf}{\noindent { proof:} }{\hfill $\Box$}
+\date{3/20/2014}
+\author{Yilun Zhang\thanks{lunge111@gmail.com}}
+\begin{document}
+\maketitle
+
+
+\section{INTRODUCTION}
+\qquad We've talked in class that multi-class classification can be reduced into a binary classification problem using the strategy called "One vs One" and "One vs All" Strategies. Professor says they are good ways to be implemented on SVM.
+
+In "One vs One" strategy, in each time, we use two groups to be the training data and built $(g-1)g/2$ models. And then use these model to predict the test set. At last we take majority vote to determine which group the observations belong.
+
+The "One vs All" strategy is similar to "One vs One", but built classifier on one group and all rest groups each time. Then use this $g$ groups to take majority vote.
+
+An idea comes to me that the "One vs One" may improve the classification. Considering in a KNN classification, the "close" groups intend to claim a large k as number of neighbors. While the groups differs from each other will claim a small k. In some multi-class classification case, some of the groups are closes and others are far away. Then choosing a uniform k to classify all groups seems to be unwise. Therefore if we build $(g-1)g/2$ different models to the groups. Use cross-validation to find "best" model of each pair of groups. It's seems reasonable that this will improve the prediction than fit a uniform model on all of groups.
+
+I use the Digit Recognizer data from Kaggle competition.\footnote{http://www.kaggle.com/c/digit-recognizer/data}. The data are hand-writing digits. Every row stand for a image. Each image is 28 pixels in height and 28 pixels in width, for a total of 784 pixels in total. Each pixel has a single pixel-value associated with it, indicating the lightness or darkness of that pixel, with higher numbers meaning darker. This pixel-value is an integer between 0 and 255, inclusive.
+
+Here I will try to classify 1, 3, 7, 8. Because 1 and 8 are very different, while 1 and 7, 3 and 8 are similar. Therefore, intuitively, different k should be used when we do KNN. And we will see whether this improves compared with use uniform k in all groups. KNN is very slow, so I will use parallel package and write own function to calculate distance function once during cross validation.
+
+\section{Cross-validation to determine k's}
+First combine 2 groups to be train set and on 
+
+\section{RESULTS AND PLOTS}
+
+
+\end{document} 
